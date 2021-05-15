@@ -19,43 +19,6 @@ int getData(char* string) {
     return re;
 }
 
-/* ARG* getArg(char* argv[], int argc) { ARG* new = malloc(sizeof(ARG)); } */
-ARG* parseArg(char* argv[], int argc) {
-    ARG* new = (ARG*)malloc(sizeof(ARG));
-    for (size_t i = 1; i < argc; i++) {
-        /* char* argv[i] = argv[i]; */
-        if (argv[i][0] == '-' && (isalpha(argv[i][1]))) {
-            switch (argv[i][1]) {
-                case 'd':
-                    new->data = getData(argv[i + 1]);
-                    printf("%d\n", new->data);
-                    break;
-                case 'q':
-                    new->search = getData(argv[i + 1]);
-                    printf("%d\n", new->search);
-                    break;
-            }
-        } else if (strncmp(argv[i], "--", 2) == 0) {
-            if (strncmp(argv[i] + 2, "bst", 3) == 0) {
-                printf("bst\n");
-                new->type = Bst;
-            } else if (strncmp(argv[i] + 2, "bs", 2) == 0) {
-                printf("bs\n");
-                new->type = Bs;
-            } else if (strncmp(argv[i] + 2, "arr", 3) == 0) {
-                printf("arr\n");
-                new->type = Arr;
-            } else if (strncmp(argv[i] + 2, "ll", 2) == 0) {
-                printf("ll\n");
-                new->type = Ll;
-            } else if (strncmp(argv[i] + 2, "hash", 4) == 0) {
-                printf("hash\n");
-                new->type = Hash;
-            }
-        }
-    }
-    return new;
-}
 void randWriteStr(int range, int count, const char* fileName) {
     char charset[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     char* randomString;
