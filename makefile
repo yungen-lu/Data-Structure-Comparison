@@ -16,8 +16,11 @@ BinarySearchTree.o: BinarySearchTree/BinarySearchTree.c BinarySearchTree/BinaryS
 Hash.o: Hash/Hash.h Hash/Hash.c
 	gcc -c Hash/Hash.c -o Hash.o
 
-main: main.c util.o Array.o BinarySearchTree.o LinkedList.o BinarySearchTree.o ArrayWithBinarySearch.o Hash.o
-	gcc main.c util.o Array.o BinarySearchTree.o LinkedList.o ArrayWithBinarySearch.o Hash.o -o main
+AVL.o: AVL/AVL.h AVL/AVL.c
+	gcc -c AVL/AVL.c -o AVL.o
+
+main: main.c util.o Array.o BinarySearchTree.o LinkedList.o BinarySearchTree.o ArrayWithBinarySearch.o Hash.o AVL.o
+	gcc main.c util.o Array.o BinarySearchTree.o LinkedList.o ArrayWithBinarySearch.o Hash.o AVL.o -o main
 
 cleanMain:
 	rm -rf main
@@ -31,6 +34,8 @@ cleanBST:
 	rm -rf BinarySearchTree.o
 cleanH:
 	rm -rf Hash.o
+cleanAVL:
+	rm -rf AVL.o
 cleanU:
 	rm -rf util.o
-cleanALL: cleanL cleanA cleanABS cleanBST cleanH cleanU cleanMain
+cleanALL: cleanL cleanA cleanABS cleanBST cleanH cleanU cleanAVL cleanMain

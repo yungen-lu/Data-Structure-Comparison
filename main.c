@@ -1,6 +1,7 @@
 #include <getopt.h>
 #include <stdio.h>
 
+#include "AVL/AVL.h"
 #include "Array/Array.h"
 #include "ArrayWithBinarySearch/ArrayWithBinarySearch.h"
 #include "BinarySearchTree/BinarySearchTree.h"
@@ -11,10 +12,10 @@ int main(int argc, char* argv[]) {
     char* filename = "test.txt";
     char* searchName = "test-search.txt";
     int ret;
-    const char* optstring = "d:q:Bbalh";
+    const char* optstring = "d:q:BbalhA";
     struct option opts[] = {{"data", 1, NULL, 'd'}, {"query", 1, NULL, 'q'}, {"bst", 0, NULL, 'B'},
                             {"bs", 0, NULL, 'b'},   {"arr", 0, NULL, 'a'},   {"ll", 0, NULL, 'l'},
-                            {"hash", 0, NULL, 'h'}
+                            {"hash", 0, NULL, 'h'}, {"avl", 0, NULL, 'A'}
 
     };
     int data, search;
@@ -42,6 +43,9 @@ int main(int argc, char* argv[]) {
             case 'h':
                 type = Hash;
                 break;
+            case 'A':
+                type = Avl;
+                break;
             default:
                 printf("------\n");
         }
@@ -66,6 +70,9 @@ int main(int argc, char* argv[]) {
             break;
         case Arr:
             testARR(data, search, filename, f1, f2);
+            break;
+        case Avl:
+            testAVL(data, search, filename, f1, f2);
             break;
     }
 }
