@@ -1,5 +1,6 @@
 #include <getopt.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "AVL/AVL.h"
 #include "Array/Array.h"
@@ -9,14 +10,14 @@
 #include "LinkedList/LinkedList.h"
 #include "util/util.h"
 int main(int argc, char* argv[]) {
-    char* filename = "test.txt";
-    char* searchName = "test-search.txt";
+    char* filename = (char*)calloc(64, sizeof(char));
+    char* searchName = (char*)calloc(64, sizeof(char));
     int ret;
     const char* optstring = "d:q:BbalhA";
-    struct option opts[] = {{"data", 1, NULL, 'd'},      {"query", 1, NULL, 'q'}, {"bst", 0, NULL, 'B'},
-                            {"bs", 0, NULL, 'b'},        {"arr", 0, NULL, 'a'},   {"ll", 0, NULL, 'l'},
-                            {"hash", 0, NULL, 'h'},      {"avl", 0, NULL, 'A'},   {"filename", 0, NULL, 'f'},
-                            {"searchname", 0, NULL, 's'}
+    struct option opts[] = {{"data", 1, NULL, 'd'},       {"query", 1, NULL, 'q'}, {"bst", 0, NULL, 'B'},
+                            {"bs", 0, NULL, 'b'},         {"arr", 0, NULL, 'a'},   {"ll", 0, NULL, 'l'},
+                            {"hash", 0, NULL, 'h'},       {"avl", 0, NULL, 'A'},   {"filename", 0, NULL, 'f'},
+                            {"searchname", 0, NULL, 's'}, {"gen", 0, NULL, 'g'}
 
     };
     int data, search;
@@ -53,6 +54,9 @@ int main(int argc, char* argv[]) {
             case 's':
                 sscanf(optarg, "%s", searchName);
                 break;
+            case 'g':
+                type = Gen;
+                break;
             default:
                 printf("------\n");
         }
@@ -60,8 +64,6 @@ int main(int argc, char* argv[]) {
     if (ret == -1) {
         return 1;
     }
-    randWriteStr(100, data, filename);
-    randWriteStr(100, search, searchName);
     FILE* f1 = openFile(filename);
     FILE* f2 = openFile(searchName);
 
@@ -83,6 +85,10 @@ int main(int argc, char* argv[]) {
             break;
         case Avl:
             testAVL(data, search, filename, f1, f2);
+            break;
+        case Gen:
+            randWriteStr(100, data, filename);
+            randWriteStr(100, search, searchName);
             break;
     }
 }
