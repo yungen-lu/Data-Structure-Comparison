@@ -72,7 +72,7 @@ void testHASH(int data, int search, char* filename, FILE* filePtr, FILE* searchP
     char buffer[1024];
 
     for (size_t i = 0; i < data; i++) {
-        fscanf(filePtr, "%s", buffer);
+        fscanf(filePtr, "%1023s", buffer);
         insert(ha, buffer, hash(buffer, len));
     }
     gettimeofday(&tv, NULL);
@@ -81,7 +81,7 @@ void testHASH(int data, int search, char* filename, FILE* filePtr, FILE* searchP
     gettimeofday(&start_tv, NULL);
 
     for (size_t i = 0; i < search; i++) {
-        fscanf(searchPtr, "%s", buffer);
+        fscanf(searchPtr, "%1023s", buffer);
         find(ha, buffer, len);
     }
     gettimeofday(&tv, NULL);

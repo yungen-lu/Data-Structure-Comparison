@@ -37,7 +37,7 @@ void testBS(int data, int search, char *filename, FILE *filePtr, FILE *searchPtr
     char buffer[1024];
 
     for (size_t i = 0; i < data; i++) {
-        fscanf(filePtr, "%s", buffer);
+        fscanf(filePtr, "%1023s", buffer);
         insertArray(arr, i, buffer);
     }
     qsort(arr, data, sizeof(char *), cmpStr);
@@ -47,7 +47,7 @@ void testBS(int data, int search, char *filename, FILE *filePtr, FILE *searchPtr
     gettimeofday(&start_tv, NULL);
 
     for (size_t i = 0; i < search; i++) {
-        fscanf(searchPtr, "%s", buffer);
+        fscanf(searchPtr, "%1023s", buffer);
         searchArray(arr, buffer, search);
     }
     gettimeofday(&tv, NULL);

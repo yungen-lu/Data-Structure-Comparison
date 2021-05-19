@@ -110,7 +110,7 @@ void testAVL(int data, int search, char *filename, FILE *filePtr, FILE *searchPt
     char buffer[1024];
 
     for (size_t i = 0; i < data; i++) {
-        fscanf(filePtr, "%s", buffer);
+        fscanf(filePtr, "%1023s", buffer);
         node = insert(node, buffer);
     }
     gettimeofday(&tv, NULL);
@@ -119,7 +119,7 @@ void testAVL(int data, int search, char *filename, FILE *filePtr, FILE *searchPt
     gettimeofday(&start_tv, NULL);
 
     for (size_t i = 0; i < search; i++) {
-        fscanf(searchPtr, "%s", buffer);
+        fscanf(searchPtr, "%1023s", buffer);
         findNode(node, buffer);
     }
     gettimeofday(&tv, NULL);
