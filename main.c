@@ -13,14 +13,15 @@ int main(int argc, char* argv[]) {
     char* filename = (char*)calloc(64, sizeof(char));
     char* searchName = (char*)calloc(64, sizeof(char));
     int ret;
-    const char* optstring = "d:q:BbalhA";
+    const char* optstring = "d:q:BbalhAgf:s:";
     struct option opts[] = {{"data", 1, NULL, 'd'},       {"query", 1, NULL, 'q'}, {"bst", 0, NULL, 'B'},
                             {"bs", 0, NULL, 'b'},         {"arr", 0, NULL, 'a'},   {"ll", 0, NULL, 'l'},
-                            {"hash", 0, NULL, 'h'},       {"avl", 0, NULL, 'A'},   {"filename", 0, NULL, 'f'},
-                            {"searchname", 0, NULL, 's'}, {"gen", 0, NULL, 'g'}
+                            {"hash", 0, NULL, 'h'},       {"avl", 0, NULL, 'A'},   {"filename", 1, NULL, 'f'},
+                            {"searchname", 1, NULL, 's'}, {"gen", 0, NULL, 'g'}
 
     };
-    int data, search;
+    int data;
+    int search;
     int type;
     while ((ret = getopt_long(argc, argv, optstring, opts, NULL)) != -1) {
         switch (ret) {
@@ -61,34 +62,42 @@ int main(int argc, char* argv[]) {
                 printf("------\n");
         }
     }
-    if (ret == -1) {
-        return 1;
+    FILE* f1;
+    FILE* f2;
+    if (type <= Avl && type >= Bst) {
+        f1 = openFile(filename);
+        f2 = openFile(searchName);
     }
-    FILE* f1 = openFile(filename);
-    FILE* f2 = openFile(searchName);
 
     switch (type) {
         case Bst:
-            testBST(data, search, filename, f1, f2);
+            testBST(data, search, f1, f2);
             break;
         case Hash:
-            testHASH(data, search, filename, f1, f2);
+            testHASH(data, search, f1, f2);
             break;
         case Ll:
-            testLL(data, search, filename, f1, f2);
+            testLL(data, search, f1, f2);
             break;
         case Bs:
-            testBS(data, search, filename, f1, f2);
+            testBS(data, search, f1, f2);
             break;
         case Arr:
-            testARR(data, search, filename, f1, f2);
+            testARR(data, search, f1, f2);
             break;
         case Avl:
-            testAVL(data, search, filename, f1, f2);
+            testAVL(data, search, f1, f2);
             break;
         case Gen:
             randWriteStr(100, data, filename);
             randWriteStr(100, search, searchName);
             break;
+        default:
+            printf("enter type\n");
+            break;
+    }
+    if (type <= Avl && type >= Bst) {
+        fclose(f1);
+        fclose(f2);
     }
 }

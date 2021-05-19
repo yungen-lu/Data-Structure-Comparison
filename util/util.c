@@ -6,19 +6,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/time.h>
-/* #include "../header/header.h" */
 void printLinkList(LinkedList* i) {
     while (i) {
         printf("%s\n", i->string);
         i = i->next;
     }
 }
-int getData(char* string) {
-    int re;
-    sscanf(string, "%d", &re);
-    return re;
-}
-
 void randWriteStr(int range, int count, const char* fileName) {
     char charset[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     char* randomString;
@@ -55,6 +48,5 @@ FILE* openFile(const char* filename) {
         fprintf(stderr, "can not scan file\n");
         return NULL;
     }
-    /* fclose(fptr); */
     return fptr;
 }

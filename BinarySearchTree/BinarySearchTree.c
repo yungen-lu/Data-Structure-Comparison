@@ -53,7 +53,7 @@ static BST *findNode(BST *root, const char *value) {
     }
     return NULL;
 }
-void testBST(int data, int search, char *filename, FILE *filePtr, FILE *searchPtr) {
+void testBST(int data, int search, FILE *filePtr, FILE *searchPtr) {
     struct timeval tv;
     struct timeval start_tv;
     double elapsed = 0.0;
@@ -67,7 +67,7 @@ void testBST(int data, int search, char *filename, FILE *filePtr, FILE *searchPt
         node = insertNode(node, buffer);
     }
     gettimeofday(&tv, NULL);
-    elapsed = ((tv.tv_sec - start_tv.tv_sec) + (tv.tv_usec - start_tv.tv_usec) / 1000000.0);
+    elapsed = ((double)(tv.tv_sec - start_tv.tv_sec) + (double)(tv.tv_usec - start_tv.tv_usec) / 1000000.0);
     printf("%f\n", elapsed);
     gettimeofday(&start_tv, NULL);
 
@@ -77,6 +77,6 @@ void testBST(int data, int search, char *filename, FILE *filePtr, FILE *searchPt
     }
     gettimeofday(&tv, NULL);
     free(node);
-    elapsed = ((tv.tv_sec - start_tv.tv_sec) + (tv.tv_usec - start_tv.tv_usec) / 1000000.0);
+    elapsed = ((double)(tv.tv_sec - start_tv.tv_sec) + (double)(tv.tv_usec - start_tv.tv_usec) / 1000000.0);
     printf("%f\n", elapsed);
 }

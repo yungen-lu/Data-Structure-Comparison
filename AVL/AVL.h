@@ -8,4 +8,4 @@ struct Node {
     int height;
 };
 typedef struct Node AVL;
-void testAVL(int data, int search, char *filename, FILE *filePtr, FILE *searchPtr);
+void testAVL(int data, int search, FILE *filePtr, FILE *searchPtr);

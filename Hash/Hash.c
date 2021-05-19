@@ -5,8 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/time.h>
-static size_t hash(char* string, size_t maxHash) {
-    char* ptr = string;
+static size_t hash(const char* string, size_t maxHash) {
+    const char* ptr = string;
     size_t i = 1;
     size_t r = 65;
     while (*ptr) {
@@ -15,7 +15,7 @@ static size_t hash(char* string, size_t maxHash) {
     }
     return i % maxHash;
 }
-static void insert(HH** r, char* string, size_t index) {
+static void insert(HH** r, const char* string, size_t index) {
     HH*(*ptr) = &r[index];
     if ((*ptr) == NULL) {
         (*ptr) = (HH*)malloc(sizeof(HH));
@@ -62,7 +62,7 @@ static HH** createHA(size_t len) {
     }
     return new;
 }
-void testHASH(int data, int search, char* filename, FILE* filePtr, FILE* searchPtr) {
+void testHASH(int data, int search, FILE* filePtr, FILE* searchPtr) {
     struct timeval tv;
     struct timeval start_tv;
     double elapsed = 0.0;
@@ -76,7 +76,7 @@ void testHASH(int data, int search, char* filename, FILE* filePtr, FILE* searchP
         insert(ha, buffer, hash(buffer, len));
     }
     gettimeofday(&tv, NULL);
-    elapsed = ((tv.tv_sec - start_tv.tv_sec) + (tv.tv_usec - start_tv.tv_usec) / 1000000.0);
+    elapsed = ((double)(tv.tv_sec - start_tv.tv_sec) + (double)(tv.tv_usec - start_tv.tv_usec) / 1000000.0);
     printf("%f\n", elapsed);
     gettimeofday(&start_tv, NULL);
 
@@ -86,6 +86,6 @@ void testHASH(int data, int search, char* filename, FILE* filePtr, FILE* searchP
     }
     gettimeofday(&tv, NULL);
     free(ha);
-    elapsed = ((tv.tv_sec - start_tv.tv_sec) + (tv.tv_usec - start_tv.tv_usec) / 1000000.0);
+    elapsed = ((double)(tv.tv_sec - start_tv.tv_sec) + (double)(tv.tv_usec - start_tv.tv_usec) / 1000000.0);
     printf("%f\n", elapsed);
 }

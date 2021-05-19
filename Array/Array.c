@@ -14,7 +14,7 @@ char **createArray(const size_t length) {
     char **new = (char **)calloc(length, sizeof(char *));
     return new;
 }
-int searchArray(char **arrayOfPtr, const char *value, const size_t length) {
+size_t searchArray(char **arrayOfPtr, const char *value, const size_t length) {
     if (arrayOfPtr == NULL) {
         return -1;
     }
@@ -28,7 +28,7 @@ int searchArray(char **arrayOfPtr, const char *value, const size_t length) {
     }
     return -1;
 }
-void testARR(int data, int search, char *filename, FILE *filePtr, FILE *searchPtr) {
+void testARR(int data, int search, FILE *filePtr, FILE *searchPtr) {
     struct timeval tv;
     struct timeval start_tv;
     double elapsed = 0.0;
@@ -42,7 +42,7 @@ void testARR(int data, int search, char *filename, FILE *filePtr, FILE *searchPt
         insertArray(arr, i, buffer);
     }
     gettimeofday(&tv, NULL);
-    elapsed = ((tv.tv_sec - start_tv.tv_sec) + (tv.tv_usec - start_tv.tv_usec) / 1000000.0);
+    elapsed = ((double)(tv.tv_sec - start_tv.tv_sec) + (double)(tv.tv_usec - start_tv.tv_usec) / 1000000.0);
     printf("%f\n", elapsed);
     gettimeofday(&start_tv, NULL);
 
@@ -52,6 +52,6 @@ void testARR(int data, int search, char *filename, FILE *filePtr, FILE *searchPt
     }
     gettimeofday(&tv, NULL);
     free(arr);
-    elapsed = ((tv.tv_sec - start_tv.tv_sec) + (tv.tv_usec - start_tv.tv_usec) / 1000000.0);
+    elapsed = ((double)(tv.tv_sec - start_tv.tv_sec) + (double)(tv.tv_usec - start_tv.tv_usec) / 1000000.0);
     printf("%f\n", elapsed);
 }

@@ -6,7 +6,7 @@
 #include <sys/time.h>
 
 #include "../Array/Array.h"
-int searchArrayWithBinarySearch(char **arrayOfPtr, const char *value, size_t start, size_t end) {
+static size_t searchArrayWithBinarySearch(char **arrayOfPtr, const char *value, size_t start, size_t end) {
     if (start > end) {
         return -1;
     }
@@ -21,13 +21,13 @@ int searchArrayWithBinarySearch(char **arrayOfPtr, const char *value, size_t sta
         return searchArrayWithBinarySearch(arrayOfPtr, value, mid + 1, end);
     }
 }
-int cmpStr(const void *a, const void *b) {
+static int cmpStr(const void *a, const void *b) {
     const char *a1 = *(char **)a;
     const char *b1 = *(char **)b;
     return strcmp(a1, b1);
 }
 
-void testBS(int data, int search, char *filename, FILE *filePtr, FILE *searchPtr) {
+void testBS(int data, int search, FILE *filePtr, FILE *searchPtr) {
     struct timeval tv;
     struct timeval start_tv;
     double elapsed = 0.0;
@@ -42,7 +42,7 @@ void testBS(int data, int search, char *filename, FILE *filePtr, FILE *searchPtr
     }
     qsort(arr, data, sizeof(char *), cmpStr);
     gettimeofday(&tv, NULL);
-    elapsed = ((tv.tv_sec - start_tv.tv_sec) + (tv.tv_usec - start_tv.tv_usec) / 1000000.0);
+    elapsed = ((double)(tv.tv_sec - start_tv.tv_sec) + (double)(tv.tv_usec - start_tv.tv_usec) / 1000000.0);
     printf("%f\n", elapsed);
     gettimeofday(&start_tv, NULL);
 
@@ -51,6 +51,6 @@ void testBS(int data, int search, char *filename, FILE *filePtr, FILE *searchPtr
         searchArray(arr, buffer, search);
     }
     gettimeofday(&tv, NULL);
-    elapsed = ((tv.tv_sec - start_tv.tv_sec) + (tv.tv_usec - start_tv.tv_usec) / 1000000.0);
+    elapsed = ((double)(tv.tv_sec - start_tv.tv_sec) + (double)(tv.tv_usec - start_tv.tv_usec) / 1000000.0);
     printf("%f\n", elapsed);
 }

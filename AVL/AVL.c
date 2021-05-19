@@ -3,14 +3,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
-static int NodeHeight(AVL *p) {
+static int NodeHeight(const AVL *p) {
     int left, right;
     left = (p && p->left ? p->left->height : 0);
     right = (p && p->right ? p->right->height : 0);
     return left > right ? left + 1 : right + 1;
 }
-static int balanceFactor(AVL *p) {
-    int left, right;
+static int balanceFactor(const AVL *p) {
+    int left;
+    int right;
     left = (p && p->left ? p->left->height : 0);
     right = (p && p->right ? p->right->height : 0);
     return left - right;
@@ -100,7 +101,7 @@ static AVL *findNode(AVL *root, const char *value) {
     return NULL;
 }
 
-void testAVL(int data, int search, char *filename, FILE *filePtr, FILE *searchPtr) {
+void testAVL(int data, int search, FILE *filePtr, FILE *searchPtr) {
     struct timeval tv;
     struct timeval start_tv;
     double elapsed = 0.0;
@@ -114,7 +115,7 @@ void testAVL(int data, int search, char *filename, FILE *filePtr, FILE *searchPt
         node = insert(node, buffer);
     }
     gettimeofday(&tv, NULL);
-    elapsed = ((tv.tv_sec - start_tv.tv_sec) + (tv.tv_usec - start_tv.tv_usec) / 1000000.0);
+    elapsed = ((double)(tv.tv_sec - start_tv.tv_sec) + (double)(tv.tv_usec - start_tv.tv_usec) / 1000000.0);
     printf("%f\n", elapsed);
     gettimeofday(&start_tv, NULL);
 
@@ -124,6 +125,6 @@ void testAVL(int data, int search, char *filename, FILE *filePtr, FILE *searchPt
     }
     gettimeofday(&tv, NULL);
     free(node);
-    elapsed = ((tv.tv_sec - start_tv.tv_sec) + (tv.tv_usec - start_tv.tv_usec) / 1000000.0);
+    elapsed = ((double)(tv.tv_sec - start_tv.tv_sec) + (double)(tv.tv_usec - start_tv.tv_usec) / 1000000.0);
     printf("%f\n", elapsed);
 }
