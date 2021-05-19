@@ -13,9 +13,10 @@ int main(int argc, char* argv[]) {
     char* searchName = "test-search.txt";
     int ret;
     const char* optstring = "d:q:BbalhA";
-    struct option opts[] = {{"data", 1, NULL, 'd'}, {"query", 1, NULL, 'q'}, {"bst", 0, NULL, 'B'},
-                            {"bs", 0, NULL, 'b'},   {"arr", 0, NULL, 'a'},   {"ll", 0, NULL, 'l'},
-                            {"hash", 0, NULL, 'h'}, {"avl", 0, NULL, 'A'}
+    struct option opts[] = {{"data", 1, NULL, 'd'},      {"query", 1, NULL, 'q'}, {"bst", 0, NULL, 'B'},
+                            {"bs", 0, NULL, 'b'},        {"arr", 0, NULL, 'a'},   {"ll", 0, NULL, 'l'},
+                            {"hash", 0, NULL, 'h'},      {"avl", 0, NULL, 'A'},   {"filename", 0, NULL, 'f'},
+                            {"searchname", 0, NULL, 's'}
 
     };
     int data, search;
@@ -46,12 +47,18 @@ int main(int argc, char* argv[]) {
             case 'A':
                 type = Avl;
                 break;
+            case 'f':
+                sscanf(optarg, "%s", filename);
+                break;
+            case 's':
+                sscanf(optarg, "%s", searchName);
+                break;
             default:
                 printf("------\n");
         }
     }
-    randWriteStr(10, data, filename);
-    randWriteStr(10, search, searchName);
+    randWriteStr(100, data, filename);
+    randWriteStr(100, search, searchName);
     FILE* f1 = openFile(filename);
     FILE* f2 = openFile(searchName);
 
