@@ -58,9 +58,9 @@ void testBST(int data, int search, char *filename, FILE *filePtr, FILE *searchPt
     struct timeval start_tv;
     double elapsed = 0.0;
 
+    gettimeofday(&start_tv, NULL);
     BST *node = NULL;
     char buffer[1024];
-    gettimeofday(&start_tv, NULL);
 
     for (size_t i = 0; i < data; i++) {
         fscanf(filePtr, "%s", buffer);
@@ -76,6 +76,7 @@ void testBST(int data, int search, char *filename, FILE *filePtr, FILE *searchPt
         findNode(node, buffer);
     }
     gettimeofday(&tv, NULL);
+    free(node);
     elapsed = ((tv.tv_sec - start_tv.tv_sec) + (tv.tv_usec - start_tv.tv_usec) / 1000000.0);
     printf("%f\n", elapsed);
 }

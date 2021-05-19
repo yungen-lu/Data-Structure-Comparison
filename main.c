@@ -57,6 +57,9 @@ int main(int argc, char* argv[]) {
                 printf("------\n");
         }
     }
+    if (ret == -1) {
+        return 1;
+    }
     randWriteStr(100, data, filename);
     randWriteStr(100, search, searchName);
     FILE* f1 = openFile(filename);

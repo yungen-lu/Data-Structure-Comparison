@@ -11,11 +11,11 @@ void insertArray(char **arrayOfPtr, const size_t index, const char *value) {
     strcpy(arrayOfPtr[index], value);
 }
 char **createArray(const size_t length) {
-    char **new = (char **)malloc(sizeof(char *) * length);
+    char **new = (char **)calloc(length, sizeof(char *));
     return new;
 }
 int searchArray(char **arrayOfPtr, const char *value, const size_t length) {
-    if (*arrayOfPtr == NULL) {
+    if (arrayOfPtr == NULL) {
         return -1;
     }
     for (size_t i = 0; i < length; i++) {
@@ -33,9 +33,9 @@ void testARR(int data, int search, char *filename, FILE *filePtr, FILE *searchPt
     struct timeval start_tv;
     double elapsed = 0.0;
 
+    gettimeofday(&start_tv, NULL);
     char **arr = createArray(data);
     char buffer[1024];
-    gettimeofday(&start_tv, NULL);
 
     for (size_t i = 0; i < data; i++) {
         fscanf(filePtr, "%s", buffer);
@@ -51,6 +51,7 @@ void testARR(int data, int search, char *filename, FILE *filePtr, FILE *searchPt
         searchArray(arr, buffer, search);
     }
     gettimeofday(&tv, NULL);
+    free(arr);
     elapsed = ((tv.tv_sec - start_tv.tv_sec) + (tv.tv_usec - start_tv.tv_usec) / 1000000.0);
     printf("%f\n", elapsed);
 }

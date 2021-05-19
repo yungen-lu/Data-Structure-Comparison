@@ -9,6 +9,7 @@ static LinkedList *insertNode(LinkedList *i, const char *value) {
         i = (LinkedList *)malloc(sizeof(LinkedList));
         i->string = (char *)malloc(sizeof(char) * strlen(value) + 1);
         strcpy(i->string, value);
+        i->next = NULL;
         return i;
     }
 
@@ -33,9 +34,9 @@ void testLL(int data, int search, char *filename, FILE *filePtr, FILE *searchPtr
     struct timeval start_tv;
     double elapsed = 0.0;
 
+    gettimeofday(&start_tv, NULL);
     LinkedList *node = NULL;
     char buffer[1024];
-    gettimeofday(&start_tv, NULL);
 
     for (size_t i = 0; i < data; i++) {
         fscanf(filePtr, "%s", buffer);

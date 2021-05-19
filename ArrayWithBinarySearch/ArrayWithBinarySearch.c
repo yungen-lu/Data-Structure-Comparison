@@ -6,16 +6,6 @@
 #include <sys/time.h>
 
 #include "../Array/Array.h"
-/* void insertArray(const char **arrayOfPtr, const char *value) { */
-/*     if (*arrayOfPtr == NULL) { */
-/*         char *newString = (char *)malloc(sizeof(char) * (strlen(value) + 1)); */
-/*         return; */
-/*     } */
-/*     size_t i = 1; */
-/*     while ((strcmp(arrayOfPtr[i], value)) < 0) { */
-/*         i++; */
-/*     } */
-/* } */
 int searchArrayWithBinarySearch(char **arrayOfPtr, const char *value, size_t start, size_t end) {
     if (start > end) {
         return -1;
@@ -42,9 +32,9 @@ void testBS(int data, int search, char *filename, FILE *filePtr, FILE *searchPtr
     struct timeval start_tv;
     double elapsed = 0.0;
 
+    gettimeofday(&start_tv, NULL);
     char **arr = createArray(data);
     char buffer[1024];
-    gettimeofday(&start_tv, NULL);
 
     for (size_t i = 0; i < data; i++) {
         fscanf(filePtr, "%s", buffer);
