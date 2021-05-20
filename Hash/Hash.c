@@ -42,7 +42,7 @@ static void insert(HH** r, const char* string, size_t index) {
     last->next = (*ptr);
     return;
 }
-static HH* find(HH** r, char* string, size_t maxHash) {
+static HH* find(HH** r, const char* string, size_t maxHash) {
     if (r == NULL) {
         return NULL;
     }

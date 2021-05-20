@@ -64,10 +64,8 @@ int main(int argc, char* argv[]) {
     }
     FILE* f1;
     FILE* f2;
-    if (type <= Avl && type >= Bst) {
-        f1 = openFile(filename);
-        f2 = openFile(searchName);
-    }
+    f1 = openFile(filename);
+    f2 = openFile(searchName);
 
     switch (type) {
         case Bst:
@@ -96,8 +94,6 @@ int main(int argc, char* argv[]) {
             printf("enter type\n");
             break;
     }
-    if (type <= Avl && type >= Bst) {
-        fclose(f1);
-        fclose(f2);
-    }
+    fclose(f1);
+    fclose(f2);
 }
