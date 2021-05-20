@@ -1,5 +1,7 @@
-#include <stdio.h>
+struct ll {
+    char *string;
+    struct ll *next;
+};
+typedef struct ll LinkedList;
 
-#include "../header/header.h"
-
-void testLL(int data, int search, FILE *filePtr, FILE *searchPtr);
+void testLL(int data, int search, const char *fileName, const char *searchName);

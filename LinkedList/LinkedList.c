@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/time.h>
+
+#include "../util/util.h"
 static LinkedList *insertNode(LinkedList *i, const char *value) {
     if (i == NULL) {
         i = (LinkedList *)malloc(sizeof(LinkedList));
@@ -29,7 +31,10 @@ static LinkedList *findNode(LinkedList *i, const char *value) {
     }
     return NULL;
 }
-void testLL(int data, int search, FILE *filePtr, FILE *searchPtr) {
+void testLL(int data, int search, const char *fileName, const char *searchName) {
+    FILE *filePtr = openFile(fileName);
+    FILE *searchPtr = openFile(searchName);
+
     struct timeval tv;
     struct timeval start_tv;
     double elapsed = 0.0;
@@ -54,5 +59,6 @@ void testLL(int data, int search, FILE *filePtr, FILE *searchPtr) {
     gettimeofday(&tv, NULL);
     elapsed = ((double)(tv.tv_sec - start_tv.tv_sec) + (double)(tv.tv_usec - start_tv.tv_usec) / 1000000.0);
     printf("linkedlist %d %d %f %f\n", data, search, elapsed, elapsed2);
-
+    fclose(filePtr);
+    fclose(searchPtr);
 }

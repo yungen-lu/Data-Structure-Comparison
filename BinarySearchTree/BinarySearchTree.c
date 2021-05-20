@@ -5,6 +5,8 @@
 #include <string.h>
 #include <sys/time.h>
 
+#include "../util/util.h"
+
 static BST *insertNode(BST *r, const char *value) {
     BST *root = r;
     if (root == NULL) {
@@ -53,7 +55,10 @@ static BST *findNode(BST *root, const char *value) {
     }
     return NULL;
 }
-void testBST(int data, int search, FILE *filePtr, FILE *searchPtr) {
+void testBST(int data, int search, const char *fileName, const char *searchName) {
+    FILE *filePtr = openFile(fileName);
+    FILE *searchPtr = openFile(searchName);
+
     struct timeval tv;
     struct timeval start_tv;
     double elapsed = 0.0;
@@ -79,5 +84,6 @@ void testBST(int data, int search, FILE *filePtr, FILE *searchPtr) {
     free(node);
     elapsed2 = ((double)(tv.tv_sec - start_tv.tv_sec) + (double)(tv.tv_usec - start_tv.tv_usec) / 1000000.0);
     printf("bst %d %d %f %f\n", data, search, elapsed, elapsed2);
-
+    fclose(filePtr);
+    fclose(searchPtr);
 }

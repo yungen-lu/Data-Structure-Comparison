@@ -6,6 +6,7 @@
 #include <string.h>
 #include <sys/time.h>
 
+#include "../util/util.h"
 void insertArray(char **arrayOfPtr, const size_t index, const char *value) {
     arrayOfPtr[index] = (char *)malloc(sizeof(char) * (strlen(value) + 1));
     strcpy(arrayOfPtr[index], value);
@@ -28,7 +29,9 @@ size_t searchArray(char **arrayOfPtr, const char *value, const size_t length) {
     }
     return -1;
 }
-void testARR(int data, int search, FILE *filePtr, FILE *searchPtr) {
+void testARR(int data, int search, const char *fileName, const char *searchName) {
+    FILE *filePtr = openFile(fileName);
+    FILE *searchPtr = openFile(searchName);
     struct timeval tv;
     struct timeval start_tv;
     double elapsed = 0.0;
@@ -54,4 +57,6 @@ void testARR(int data, int search, FILE *filePtr, FILE *searchPtr) {
     free(arr);
     elapsed2 = ((double)(tv.tv_sec - start_tv.tv_sec) + (double)(tv.tv_usec - start_tv.tv_usec) / 1000000.0);
     printf("array %d %d %f %f\n", data, search, elapsed, elapsed2);
+    fclose(filePtr);
+    fclose(searchPtr);
 }

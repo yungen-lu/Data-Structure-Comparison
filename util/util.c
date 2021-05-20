@@ -6,12 +6,16 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/time.h>
-void printLinkList(LinkedList* i) {
-    while (i) {
-        printf("%s\n", i->string);
-        i = i->next;
+int findDup(char** arrayOfStr, const char* string, int len) {
+    for (int j = 0; j < len; j++) {
+        if (strcmp(arrayOfStr[j], string) == 0) {
+            printf("DUP\n");
+            return 0;
+        }
     }
+    return 1;
 }
+
 void randWriteStr(int range, int count, const char* fileName) {
     char charset[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     char* randomString;
@@ -21,6 +25,7 @@ void randWriteStr(int range, int count, const char* fileName) {
         fprintf(stderr, "can not scan file\n");
         return;
     }
+    char** arrayOfStr = calloc(count, sizeof(char*));
     srand(time(0));
     for (int i = 0; i < count; i++) {
         size_t len = (rand() % range) + 1;
@@ -36,8 +41,17 @@ void randWriteStr(int range, int count, const char* fileName) {
 
             randomString[len] = '\0';
         }
-        fprintf(fptr, "%s\n", randomString);
+        if (findDup(arrayOfStr, randomString, i)) {
+            /* fprintf(fptr, "%s\n", randomString); */
+            /* strcpy(arrayOfStr[i], randomString); */
+            arrayOfStr[i] = strdup(randomString);
+        } else {
+            i--;
+        }
         free(randomString);
+    }
+    for (int k = 0; k < count; k++) {
+        fprintf(fptr, "%s\n", arrayOfStr[k]);
     }
     fclose(fptr);
 }
@@ -45,7 +59,7 @@ FILE* openFile(const char* filename) {
     FILE* fptr;
     fptr = fopen(filename, "r");
     if (fptr == NULL) {
-        fprintf(stderr, "can not scan file\n");
+        fprintf(stderr, "can not open file\n");
         return NULL;
     }
     return fptr;

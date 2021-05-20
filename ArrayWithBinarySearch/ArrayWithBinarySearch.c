@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/time.h>
-
+#include "../util/util.h"
 #include "../Array/Array.h"
 static size_t searchArrayWithBinarySearch(char **arrayOfPtr, const char *value, size_t start, size_t end) {
     if (start > end) {
@@ -27,7 +27,10 @@ static int cmpStr(const void *a, const void *b) {
     return strcmp(a1, b1);
 }
 
-void testBS(int data, int search, FILE *filePtr, FILE *searchPtr) {
+void testBS(int data, int search, const char *fileName, const char *searchName) {
+    FILE *filePtr = openFile(fileName);
+    FILE *searchPtr = openFile(searchName);
+
     struct timeval tv;
     struct timeval start_tv;
     double elapsed = 0.0;
@@ -52,5 +55,7 @@ void testBS(int data, int search, FILE *filePtr, FILE *searchPtr) {
     gettimeofday(&tv, NULL);
     elapsed2 = ((double)(tv.tv_sec - start_tv.tv_sec) + (double)(tv.tv_usec - start_tv.tv_usec) / 1000000.0);
     printf("arraywithbs %d %d %f %f\n", data, search, elapsed, elapsed2);
+    fclose(filePtr);
+    fclose(searchPtr);
 
 }

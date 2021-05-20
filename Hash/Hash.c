@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/time.h>
+
+#include "../util/util.h"
 static size_t hash(const char* string, size_t maxHash) {
     const char* ptr = string;
     size_t i = 1;
@@ -62,7 +64,10 @@ static HH** createHA(size_t len) {
     }
     return new;
 }
-void testHASH(int data, int search, FILE* filePtr, FILE* searchPtr) {
+void testHASH(int data, int search, const char* fileName, const char* searchName) {
+    FILE* filePtr = openFile(fileName);
+    FILE* searchPtr = openFile(searchName);
+
     struct timeval tv;
     struct timeval start_tv;
     double elapsed = 0.0;
@@ -88,5 +93,6 @@ void testHASH(int data, int search, FILE* filePtr, FILE* searchPtr) {
     free(ha);
     elapsed2 = ((double)(tv.tv_sec - start_tv.tv_sec) + (double)(tv.tv_usec - start_tv.tv_usec) / 1000000.0);
     printf("hash %d %d %f %f\n", data, search, elapsed, elapsed2);
-
+    fclose(filePtr);
+    fclose(searchPtr);
 }
