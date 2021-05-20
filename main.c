@@ -20,16 +20,16 @@ int main(int argc, char* argv[]) {
                             {"searchname", 1, NULL, 's'}, {"gen", 0, NULL, 'g'}
 
     };
-    int data;
-    int search;
+    double data;
+    double search;
     int type;
     while ((ret = getopt_long(argc, argv, optstring, opts, NULL)) != -1) {
         switch (ret) {
             case 'd':
-                sscanf(optarg, "%d", &data);
+                sscanf(optarg, "%le", &data);
                 break;
             case 'q':
-                sscanf(optarg, "%d", &search);
+                sscanf(optarg, "%le", &search);
                 break;
             case 'B':
                 type = Bst;
@@ -62,29 +62,29 @@ int main(int argc, char* argv[]) {
                 printf("------\n");
         }
     }
-    FILE* f1;
-    FILE* f2;
-    f1 = openFile(filename);
-    f2 = openFile(searchName);
+    /* FILE* f1; */
+    /* FILE* f2; */
+    /* f1 = openFile(filename); */
+    /* f2 = openFile(searchName); */
 
     switch (type) {
         case Bst:
-            testBST(data, search, f1, f2);
+            testBST(data, search, filename, searchName);
             break;
         case Hash:
-            testHASH(data, search, f1, f2);
+            testHASH(data, search, filename, searchName);
             break;
         case Ll:
-            testLL(data, search, f1, f2);
+            testLL(data, search, filename, searchName);
             break;
         case Bs:
-            testBS(data, search, f1, f2);
+            testBS(data, search, filename, searchName);
             break;
         case Arr:
-            testARR(data, search, f1, f2);
+            testARR(data, search, filename, searchName);
             break;
         case Avl:
-            testAVL(data, search, f1, f2);
+            testAVL(data, search, filename, searchName);
             break;
         case Gen:
             randWriteStr(100, data, filename);
@@ -94,6 +94,6 @@ int main(int argc, char* argv[]) {
             printf("enter type\n");
             break;
     }
-    fclose(f1);
-    fclose(f2);
+    /* fclose(f1); */
+    /* fclose(f2); */
 }
