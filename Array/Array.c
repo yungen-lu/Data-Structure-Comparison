@@ -32,6 +32,7 @@ void testARR(int data, int search, FILE *filePtr, FILE *searchPtr) {
     struct timeval tv;
     struct timeval start_tv;
     double elapsed = 0.0;
+    double elapsed2 = 0.0;
 
     gettimeofday(&start_tv, NULL);
     char **arr = createArray(data);
@@ -43,7 +44,6 @@ void testARR(int data, int search, FILE *filePtr, FILE *searchPtr) {
     }
     gettimeofday(&tv, NULL);
     elapsed = ((double)(tv.tv_sec - start_tv.tv_sec) + (double)(tv.tv_usec - start_tv.tv_usec) / 1000000.0);
-    printf("%f\n", elapsed);
     gettimeofday(&start_tv, NULL);
 
     for (size_t i = 0; i < search; i++) {
@@ -52,6 +52,6 @@ void testARR(int data, int search, FILE *filePtr, FILE *searchPtr) {
     }
     gettimeofday(&tv, NULL);
     free(arr);
-    elapsed = ((double)(tv.tv_sec - start_tv.tv_sec) + (double)(tv.tv_usec - start_tv.tv_usec) / 1000000.0);
-    printf("%f\n", elapsed);
+    elapsed2 = ((double)(tv.tv_sec - start_tv.tv_sec) + (double)(tv.tv_usec - start_tv.tv_usec) / 1000000.0);
+    printf("array %d %d %f %f\n", data, search, elapsed, elapsed2);
 }

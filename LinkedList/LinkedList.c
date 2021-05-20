@@ -33,6 +33,7 @@ void testLL(int data, int search, FILE *filePtr, FILE *searchPtr) {
     struct timeval tv;
     struct timeval start_tv;
     double elapsed = 0.0;
+    double elapsed2 = 0.0;
 
     gettimeofday(&start_tv, NULL);
     LinkedList *node = NULL;
@@ -45,7 +46,6 @@ void testLL(int data, int search, FILE *filePtr, FILE *searchPtr) {
     gettimeofday(&tv, NULL);
     elapsed = ((double)(tv.tv_sec - start_tv.tv_sec) + (double)(tv.tv_usec - start_tv.tv_usec) / 1000000.0);
     printf("%f\n", elapsed);
-    gettimeofday(&start_tv, NULL);
 
     for (size_t i = 0; i < search; i++) {
         fscanf(searchPtr, "%1023s", buffer);
@@ -53,5 +53,6 @@ void testLL(int data, int search, FILE *filePtr, FILE *searchPtr) {
     }
     gettimeofday(&tv, NULL);
     elapsed = ((double)(tv.tv_sec - start_tv.tv_sec) + (double)(tv.tv_usec - start_tv.tv_usec) / 1000000.0);
-    printf("%f\n", elapsed);
+    printf("linkedlist %d %d %f %f\n", data, search, elapsed, elapsed2);
+
 }

@@ -31,7 +31,7 @@ void testBS(int data, int search, FILE *filePtr, FILE *searchPtr) {
     struct timeval tv;
     struct timeval start_tv;
     double elapsed = 0.0;
-
+    double elapsed2 = 0.0;
     gettimeofday(&start_tv, NULL);
     char **arr = createArray(data);
     char buffer[1024];
@@ -43,7 +43,6 @@ void testBS(int data, int search, FILE *filePtr, FILE *searchPtr) {
     qsort(arr, data, sizeof(char *), cmpStr);
     gettimeofday(&tv, NULL);
     elapsed = ((double)(tv.tv_sec - start_tv.tv_sec) + (double)(tv.tv_usec - start_tv.tv_usec) / 1000000.0);
-    printf("%f\n", elapsed);
     gettimeofday(&start_tv, NULL);
 
     for (size_t i = 0; i < search; i++) {
@@ -51,6 +50,7 @@ void testBS(int data, int search, FILE *filePtr, FILE *searchPtr) {
         searchArray(arr, buffer, search);
     }
     gettimeofday(&tv, NULL);
-    elapsed = ((double)(tv.tv_sec - start_tv.tv_sec) + (double)(tv.tv_usec - start_tv.tv_usec) / 1000000.0);
-    printf("%f\n", elapsed);
+    elapsed2 = ((double)(tv.tv_sec - start_tv.tv_sec) + (double)(tv.tv_usec - start_tv.tv_usec) / 1000000.0);
+    printf("arraywithbs %d %d %f %f\n", data, search, elapsed, elapsed2);
+
 }
