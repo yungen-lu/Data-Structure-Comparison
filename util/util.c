@@ -27,7 +27,7 @@ void randWriteStr(int range, int count, const char* fileName) {
         fprintf(stderr, "can not scan file\n");
         return;
     }
-    int* hashTable = (int*)calloc(count, sizeof(int));
+    int* hashTable = (int*)calloc(count * 5, sizeof(int));
     srand(time(NULL));
     for (int i = 0; i < count; i++) {
         size_t len = (rand() % range) + 1;
@@ -43,7 +43,7 @@ void randWriteStr(int range, int count, const char* fileName) {
 
             randomString[len] = '\0';
         }
-        if (findDup(hashTable, randomString, count)) {
+        if (findDup(hashTable, randomString, count * 5)) {
             fprintf(fptr, "%s\n", randomString);
         } else {
             i--;
