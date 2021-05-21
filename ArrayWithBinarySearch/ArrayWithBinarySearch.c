@@ -1,11 +1,13 @@
 #include "ArrayWithBinarySearch.h"
 
 #include <stddef.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/time.h>
-#include "../util/util.h"
+
 #include "../Array/Array.h"
+#include "../util/util.h"
 static size_t searchArrayWithBinarySearch(char **arrayOfPtr, const char *value, size_t start, size_t end) {
     if (start > end) {
         return -1;
@@ -57,5 +59,4 @@ void testBS(int data, int search, const char *fileName, const char *searchName) 
     printf("arraywithbs %d %d %f %f\n", data, search, elapsed, elapsed2);
     fclose(filePtr);
     fclose(searchPtr);
-
 }

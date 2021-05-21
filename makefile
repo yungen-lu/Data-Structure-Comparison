@@ -1,27 +1,28 @@
+CC = gcc
+# CXX = include-what-you-use
 util.o: util/util.c util/util.h header/header.h
-	gcc -c util/util.c -o util.o
+	$(CC) -c util/util.c -o util.o
 
 LinkedList.o: LinkedList/LinkedList.c LinkedList/LinkedList.h
-	gcc -c LinkedList/LinkedList.c -o LinkedList.o
+	$(CC) -c LinkedList/LinkedList.c -o LinkedList.o
 
 Array.o: Array/Array.c Array/Array.h
-	gcc -c Array/Array.c -o Array.o
+	$(CC) -c Array/Array.c -o Array.o
 
 ArrayWithBinarySearch.o: ArrayWithBinarySearch/ArrayWithBinarySearch.c ArrayWithBinarySearch/ArrayWithBinarySearch.h 
-	gcc -c ArrayWithBinarySearch/ArrayWithBinarySearch.c -o ArrayWithBinarySearch.o
+	$(CC) -c ArrayWithBinarySearch/ArrayWithBinarySearch.c -o ArrayWithBinarySearch.o
 
 BinarySearchTree.o: BinarySearchTree/BinarySearchTree.c BinarySearchTree/BinarySearchTree.h
-	gcc -c BinarySearchTree/BinarySearchTree.c -o BinarySearchTree.o
+	$(CC) -c BinarySearchTree/BinarySearchTree.c -o BinarySearchTree.o
 
 Hash.o: Hash/Hash.h Hash/Hash.c
-	gcc -c Hash/Hash.c -o Hash.o
+	$(CC) -c Hash/Hash.c -o Hash.o
 
 AVL.o: AVL/AVL.h AVL/AVL.c
-	gcc -c AVL/AVL.c -o AVL.o
+	$(CC) -c AVL/AVL.c -o AVL.o
 
 main: main.c util.o Array.o BinarySearchTree.o LinkedList.o BinarySearchTree.o ArrayWithBinarySearch.o Hash.o AVL.o
 	gcc main.c util.o Array.o BinarySearchTree.o LinkedList.o ArrayWithBinarySearch.o Hash.o AVL.o -o main
-
 cleanMain:
 	rm -rf main
 cleanL:

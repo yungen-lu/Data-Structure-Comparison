@@ -87,8 +87,8 @@ int main(int argc, char* argv[]) {
             testAVL(data, search, filename, searchName);
             break;
         case Gen:
-            randWriteStr(500, data, filename);
-            randWriteStr(500, search, searchName);
+            randWriteStr(100, data, filename);
+            randWriteStr(100, search, searchName);
             break;
         default:
             printf("enter type\n");

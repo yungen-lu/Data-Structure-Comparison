@@ -1,11 +1,8 @@
 #include "util.h"
 
-#include <ctype.h>
-#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <sys/time.h>
+#include <time.h>
 
 #include "../Hash/Hash.h"
 int findDup(int* hashTable, const char* string, int len) {
