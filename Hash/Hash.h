@@ -6,3 +6,4 @@ struct hh {
     struct hh* next;
 };
 typedef struct hh HH;
+size_t hash(const char* string, size_t maxHash);

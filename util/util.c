@@ -6,14 +6,16 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/time.h>
-int findDup(char** arrayOfStr, const char* string, int len) {
-    for (int j = 0; j < len; j++) {
-        if (strcmp(arrayOfStr[j], string) == 0) {
-            printf("DUP\n");
-            return 0;
-        }
+
+#include "../Hash/Hash.h"
+int findDup(int* hashTable, const char* string, int len) {
+    size_t idx = hash(string, len);
+    if (hashTable[idx] == 1) {
+        return 0;
+    } else {
+        hashTable[idx] = 1;
+        return 1;
     }
-    return 1;
 }
 
 void randWriteStr(int range, int count, const char* fileName) {
@@ -25,8 +27,8 @@ void randWriteStr(int range, int count, const char* fileName) {
         fprintf(stderr, "can not scan file\n");
         return;
     }
-    char** arrayOfStr = calloc(count, sizeof(char*));
-    srand(time(0));
+    int* hashTable = (int*)calloc(count, sizeof(int));
+    srand(time(NULL));
     for (int i = 0; i < count; i++) {
         size_t len = (rand() % range) + 1;
         randomString = malloc(sizeof(char) * len + 1);
@@ -41,17 +43,12 @@ void randWriteStr(int range, int count, const char* fileName) {
 
             randomString[len] = '\0';
         }
-        if (findDup(arrayOfStr, randomString, i)) {
-            /* fprintf(fptr, "%s\n", randomString); */
-            /* strcpy(arrayOfStr[i], randomString); */
-            arrayOfStr[i] = strdup(randomString);
+        if (findDup(hashTable, randomString, count)) {
+            fprintf(fptr, "%s\n", randomString);
         } else {
             i--;
         }
         free(randomString);
-    }
-    for (int k = 0; k < count; k++) {
-        fprintf(fptr, "%s\n", arrayOfStr[k]);
     }
     fclose(fptr);
 }

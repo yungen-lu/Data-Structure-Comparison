@@ -7,7 +7,7 @@
 #include <sys/time.h>
 
 #include "../util/util.h"
-static size_t hash(const char* string, size_t maxHash) {
+size_t hash(const char* string, size_t maxHash) {
     const char* ptr = string;
     size_t i = 1;
     size_t r = 65;
