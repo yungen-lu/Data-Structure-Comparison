@@ -52,7 +52,8 @@ void testBS(int data, int search, const char *fileName, const char *searchName) 
 
     for (size_t i = 0; i < search; i++) {
         fscanf(searchPtr, "%1023s", buffer);
-        searchArray(arr, buffer, search);
+        /* searchArray(arr, buffer, search); */
+        searchArrayWithBinarySearch(arr, buffer, 0, data - 1);
     }
     gettimeofday(&tv, NULL);
     elapsed2 = ((double)(tv.tv_sec - start_tv.tv_sec) + (double)(tv.tv_usec - start_tv.tv_usec) / 1000000.0);

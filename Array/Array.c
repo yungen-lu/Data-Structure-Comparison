@@ -51,7 +51,7 @@ void testARR(int data, int search, const char *fileName, const char *searchName)
 
     for (size_t i = 0; i < search; i++) {
         fscanf(searchPtr, "%1023s", buffer);
-        searchArray(arr, buffer, search);
+        searchArray(arr, buffer, data);
     }
     gettimeofday(&tv, NULL);
     free(arr);
