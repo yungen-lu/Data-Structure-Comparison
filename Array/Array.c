@@ -15,7 +15,7 @@ char **createArray(const size_t length) {
     char **new = (char **)calloc(length, sizeof(char *));
     return new;
 }
-size_t searchArray(char **arrayOfPtr, const char *value, const size_t length) {
+static size_t searchArray(char **arrayOfPtr, const char *value, const size_t length) {
     /* if (arrayOfPtr == NULL) { */
     /*     return -1; */
     /* } */
