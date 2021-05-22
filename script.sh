@@ -49,9 +49,7 @@ genRand(){
 	if [ "$ans" != "${ans#[Yy]}" ]; then
         echo "start generating random text files"
         for((i=$startingLen; i <= $endingLen; i=i+$interval)); do
-            # ./GenRandMain "-s" $i output/$i-string.txt >/dev/null
-            # ./GenRandMain "-n" $i output/$i-number.txt >/dev/null
-            ./main -d $i -q $i -g -f output/$i-data.txt -s output/$i-search.txt
+            ./main -d $i -q $((i/10)) -g -f output/$i-data.txt -s output/$((i/10))-search.txt
         done
         echo "done generating"
     fi
@@ -59,12 +57,12 @@ genRand(){
 execTests(){
     echo "start excuting tests"
     for((i=$startingLen; i <= $endingLen; i=i+$interval)); do
-        ./main -d $i -q $i -A -f output/$i-data.txt -s output/$i-search.txt >> output/result.txt
-        ./main -d $i -q $i -B -f output/$i-data.txt -s output/$i-search.txt >> output/result.txt
-        ./main -d $i -q $i -h -f output/$i-data.txt -s output/$i-search.txt >> output/result.txt
-        ./main -d $i -q $i -b -f output/$i-data.txt -s output/$i-search.txt >> output/result.txt
-        ./main -d $i -q $i -l -f output/$i-data.txt -s output/$i-search.txt >> output/result.txt
-        ./main -d $i -q $i -a -f output/$i-data.txt -s output/$i-search.txt >> output/result.txt
+        ./main -d $i -q $((i/10)) -A -f output/$i-data.txt -s output/$((i/10))-search.txt >> output/result.txt
+        ./main -d $i -q $((i/10)) -B -f output/$i-data.txt -s output/$((i/10))-search.txt >> output/result.txt
+        ./main -d $i -q $((i/10)) -h -f output/$i-data.txt -s output/$((i/10))-search.txt >> output/result.txt
+        ./main -d $i -q $((i/10)) -b -f output/$i-data.txt -s output/$((i/10))-search.txt >> output/result.txt
+        ./main -d $i -q $((i/10)) -l -f output/$i-data.txt -s output/$((i/10))-search.txt >> output/result.txt
+        ./main -d $i -q $((i/10)) -a -f output/$i-data.txt -s output/$((i/10))-search.txt >> output/result.txt
     done
     echo "done excuting"
     
@@ -72,15 +70,6 @@ execTests(){
 checkOutputDir(){
     [ -d "./output" ] || mkdir "./output"
 }
-# checkRand(){
-#     for((i=$startingLen; i <= $endingLen; i++)); do
-#         if test -f output/$i-string.txt && test  -f output/$i-number.txt;
-#         then
-#             echo  "$i exists"
-#         else
-#         fi
-# 
-# }
 checkOutputDir
 getLen
 genRand
