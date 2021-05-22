@@ -12,6 +12,8 @@
 int main(int argc, char* argv[]) {
     char* filename = (char*)calloc(64, sizeof(char));
     char* searchName = (char*)calloc(64, sizeof(char));
+    filename = "default-data.txt";
+    searchName = "default-search.txt";
     int ret;
     const char* optstring = "d:q:BbalhAgf:s:";
     struct option opts[] = {{"data", 1, NULL, 'd'},       {"query", 1, NULL, 'q'}, {"bst", 0, NULL, 'B'},
