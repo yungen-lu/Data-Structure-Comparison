@@ -10,9 +10,9 @@
 #include "LinkedList/LinkedList.h"
 #include "util/util.h"
 int main(int argc, char* argv[]) {
-    char* filename = (char*)calloc(64, sizeof(char));
+    char* fileName = (char*)calloc(64, sizeof(char));
     char* searchName = (char*)calloc(64, sizeof(char));
-    filename = "default-data.txt";
+    fileName = "default-data.txt";
     searchName = "default-search.txt";
     int ret;
     const char* optstring = "d:q:BbalhAgf:s:";
@@ -52,7 +52,7 @@ int main(int argc, char* argv[]) {
                 type = Avl;
                 break;
             case 'f':
-                sscanf(optarg, "%s", filename);
+                sscanf(optarg, "%s", fileName);
                 break;
             case 's':
                 sscanf(optarg, "%s", searchName);
@@ -67,29 +67,31 @@ int main(int argc, char* argv[]) {
 
     switch (type) {
         case Bst:
-            testBST(data, search, filename, searchName);
+            testBST(data, search, fileName, searchName);
             break;
         case Hash:
-            testHASH(data, search, filename, searchName);
+            testHASH(data, search, fileName, searchName);
             break;
         case Ll:
-            testLL(data, search, filename, searchName);
+            testLL(data, search, fileName, searchName);
             break;
         case Bs:
-            testBS(data, search, filename, searchName);
+            testBS(data, search, fileName, searchName);
             break;
         case Arr:
-            testARR(data, search, filename, searchName);
+            testARR(data, search, fileName, searchName);
             break;
         case Avl:
-            testAVL(data, search, filename, searchName);
+            testAVL(data, search, fileName, searchName);
             break;
         case Gen:
-            randWriteStr(100, data, filename, 1);
+            randWriteStr(100, data, fileName, 1);
             randWriteStr(100, search, searchName, 0);
             break;
         default:
             printf("enter type\n");
             break;
     }
+    free(fileName);
+    free(searchName);
 }
