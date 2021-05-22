@@ -62,10 +62,6 @@ int main(int argc, char* argv[]) {
                 printf("------\n");
         }
     }
-    /* FILE* f1; */
-    /* FILE* f2; */
-    /* f1 = openFile(filename); */
-    /* f2 = openFile(searchName); */
 
     switch (type) {
         case Bst:
@@ -87,13 +83,11 @@ int main(int argc, char* argv[]) {
             testAVL(data, search, filename, searchName);
             break;
         case Gen:
-            randWriteStr(100, data, filename);
-            randWriteStr(100, search, searchName);
+            randWriteStr(100, data, filename, 1);
+            randWriteStr(100, search, searchName, 0);
             break;
         default:
             printf("enter type\n");
             break;
     }
-    /* fclose(f1); */
-    /* fclose(f2); */
 }

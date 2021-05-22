@@ -15,7 +15,7 @@ int findDup(int* hashTable, const char* string, int len) {
     }
 }
 
-void randWriteStr(int range, int count, const char* fileName) {
+void randWriteStr(int range, int count, const char* fileName, int FLAG) {
     char charset[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     char* randomString;
     FILE* fptr;
@@ -40,10 +40,14 @@ void randWriteStr(int range, int count, const char* fileName) {
 
             randomString[len] = '\0';
         }
-        if (findDup(hashTable, randomString, count * 5)) {
-            fprintf(fptr, "%s\n", randomString);
+        if (FLAG == 1) {
+            if (findDup(hashTable, randomString, count * 5)) {
+                fprintf(fptr, "%s\n", randomString);
+            } else {
+                i--;
+            }
         } else {
-            i--;
+            fprintf(fptr, "%s\n", randomString);
         }
         free(randomString);
     }

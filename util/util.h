@@ -8,5 +8,5 @@ struct aa {
 };
 typedef struct aa ARG;
 enum MyEnum { Bst, Ll, Bs, Arr, Hash, Avl, Gen };
-void randWriteStr(int range, int count, const char* fileName);
+void randWriteStr(int range, int count, const char* fileName, int FLAG);
 FILE* openFile(const char* filename);
