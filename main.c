@@ -10,10 +10,8 @@
 #include "LinkedList/LinkedList.h"
 #include "util/util.h"
 int main(int argc, char* argv[]) {
-    char* fileName = (char*)calloc(64, sizeof(char));
-    char* searchName = (char*)calloc(64, sizeof(char));
-    fileName = "default-data.txt";
-    searchName = "default-search.txt";
+    char fileName[64] = "default-data.txt";
+    char searchName[64] = "default-search.txt";
     int ret;
     const char* optstring = "d:q:BbalhAgf:s:";
     struct option opts[] = {{"data", 1, NULL, 'd'},       {"query", 1, NULL, 'q'}, {"bst", 0, NULL, 'B'},
@@ -22,8 +20,8 @@ int main(int argc, char* argv[]) {
                             {"searchname", 1, NULL, 's'}, {"gen", 0, NULL, 'g'}
 
     };
-    double data;
-    double search;
+    double data = 1;
+    double search = 1;
     int type;
     while ((ret = getopt_long(argc, argv, optstring, opts, NULL)) != -1) {
         switch (ret) {
@@ -92,6 +90,4 @@ int main(int argc, char* argv[]) {
             printf("enter type\n");
             break;
     }
-    free(fileName);
-    free(searchName);
 }

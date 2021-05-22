@@ -51,6 +51,7 @@ void randWriteStr(int range, int count, const char* fileName, int FLAG) {
         }
         free(randomString);
     }
+    free(hashTable);
     fclose(fptr);
 }
 FILE* openFile(const char* filename) {
