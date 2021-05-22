@@ -56,6 +56,7 @@ void testLL(int data, int search, const char *fileName, const char *searchName) 
         findNode(node, buffer);
     }
     gettimeofday(&tv, NULL);
+    free(node);
     elapsed2 = ((double)(tv.tv_sec - start_tv.tv_sec) + (double)(tv.tv_usec - start_tv.tv_usec) / 1000000.0);
     printf("linkedlist %d %d %f %f\n", data, search, elapsed, elapsed2);
     fclose(filePtr);

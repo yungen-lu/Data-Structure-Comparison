@@ -56,6 +56,7 @@ void testBS(int data, int search, const char *fileName, const char *searchName) 
         searchArrayWithBinarySearch(arr, buffer, 0, data - 1);
     }
     gettimeofday(&tv, NULL);
+    free(arr);
     elapsed2 = ((double)(tv.tv_sec - start_tv.tv_sec) + (double)(tv.tv_usec - start_tv.tv_usec) / 1000000.0);
     printf("arraywithbs %d %d %f %f\n", data, search, elapsed, elapsed2);
     fclose(filePtr);

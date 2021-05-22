@@ -16,13 +16,13 @@ char **createArray(const size_t length) {
     return new;
 }
 size_t searchArray(char **arrayOfPtr, const char *value, const size_t length) {
-    if (arrayOfPtr == NULL) {
-        return -1;
-    }
+    /* if (arrayOfPtr == NULL) { */
+    /*     return -1; */
+    /* } */
     for (size_t i = 0; i < length; i++) {
-        if (arrayOfPtr[i] == NULL) {
-            return -1;
-        }
+        /* if (arrayOfPtr[i] == NULL) { */
+        /*     return -1; */
+        /* } */
         if (strcmp(value, arrayOfPtr[i]) == 0) {
             return i;
         }
