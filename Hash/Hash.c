@@ -16,12 +16,11 @@ size_t hash(const char* string, size_t maxHash) {
     }
     return i % maxHash;
 }
-static void insert(HH** r, const char* string, size_t index) {
+void insert(HH** r, const char* string, size_t index) {
     HH*(*ptr) = &r[index];
     if ((*ptr) == NULL) {
         (*ptr) = (HH*)malloc(sizeof(HH));
         (*ptr)->next = NULL;
-        (*ptr)->count = 1;
         (*ptr)->string = (char*)malloc(sizeof(char) * strlen(string) + 2);
         strcpy((*ptr)->string, string);
         return;
@@ -29,7 +28,6 @@ static void insert(HH** r, const char* string, size_t index) {
     HH* last;
     while ((*ptr) != NULL) {
         if (strcmp((*ptr)->string, string) == 0) {
-            (*ptr)->count++;
             return;
         }
         last = (*ptr);
@@ -37,13 +35,12 @@ static void insert(HH** r, const char* string, size_t index) {
     }
     (*ptr) = (HH*)malloc(sizeof(HH));
     (*ptr)->next = NULL;
-    (*ptr)->count = 1;
     (*ptr)->string = (char*)malloc(sizeof(char) * strlen(string) + 2);
     strcpy((*ptr)->string, string);
     last->next = (*ptr);
     return;
 }
-static HH* find(HH** r, const char* string, size_t maxHash) {
+HH* find(HH** r, const char* string, size_t maxHash) {
     if (r == NULL) {
         return NULL;
     }
@@ -56,7 +53,7 @@ static HH* find(HH** r, const char* string, size_t maxHash) {
     }
     return NULL;
 }
-static HH** createHA(size_t len) {
+HH** createHA(size_t len) {
     HH** new = (HH**)malloc(sizeof(HH*) * len);
     for (size_t i = 0; i < len; i++) {
         new[i] = NULL;

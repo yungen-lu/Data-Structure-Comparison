@@ -5,14 +5,11 @@
 #include <time.h>
 
 #include "../Hash/Hash.h"
-int findDup(int* hashTable, const char* string, int len) {
-    size_t idx = hash(string, len);
-    if (hashTable[idx] == 1) {
-        return 0;
-    } else {
-        hashTable[idx] = 1;
+int findDup(HH** hashTable, const char* string, int len) {
+    if (find(hashTable, string, len) == NULL)
         return 1;
-    }
+    else
+        return 0;
 }
 
 void randWriteStr(int range, int count, const char* fileName, int FLAG) {
@@ -24,7 +21,9 @@ void randWriteStr(int range, int count, const char* fileName, int FLAG) {
         fprintf(stderr, "can not scan file\n");
         return;
     }
-    int* hashTable = (int*)calloc(count * 5, sizeof(int));
+    /* int* hashTable = (int*)calloc(count * 5, sizeof(int)); */
+    size_t hashLen = count * 5;
+    HH** hashTable = createHA(hashLen);
     srand(time(NULL));
     for (int i = 0; i < count; i++) {
         size_t len = (rand() % range) + 1;
@@ -41,8 +40,9 @@ void randWriteStr(int range, int count, const char* fileName, int FLAG) {
             randomString[len] = '\0';
         }
         if (FLAG == 1) {
-            if (findDup(hashTable, randomString, count * 5)) {
+            if (find(hashTable, randomString, hashLen) == NULL) {
                 fprintf(fptr, "%s\n", randomString);
+                insert(hashTable, randomString, hash(randomString, hashLen));
             } else {
                 i--;
             }
